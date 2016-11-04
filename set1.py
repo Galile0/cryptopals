@@ -1,7 +1,7 @@
 from api.common import *
 from binascii import hexlify, unhexlify
 from base64 import b64encode, b64decode
-
+from Crypto.Cipher import AES
 
 def c1():
     challenge = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
@@ -96,6 +96,15 @@ def c6():
     decrypt = xor_bytes(ext_key, file[:len(ext_key)])
     return ''.join([chr(x) for x in key[1]]), decrypt
 
+
+def c7():
+    file = b64decode(''.join([line.rstrip('\n') for line in open('c7.txt')]))
+
+    key = b'YELLOW SUBMARINE'
+    cipher = AES.new(key, AES.MODE_ECB)
+    plaintext = cipher.decrypt(file)
+    return plaintext
+
 if __name__ == "__main__":
     print("Challenge 1:", c1())
     print("Challenge 2:", c2())
@@ -103,3 +112,4 @@ if __name__ == "__main__":
     print("Challenge 4:", c4())
     print("Challenge 5:", c5())
     print("Challenge 6:", c6())
+    print("Challenge 7:", c7())
