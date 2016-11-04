@@ -29,7 +29,7 @@ def c3(challenge="1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a39
 
 
 def c4():
-    challenges = [line.rstrip('\n') for line in open('c4.txt')]
+    challenges = [line.rstrip('\n') for line in open('data/c4.txt')]
     solutions = {}
     for challenge in challenges:
         sol = c3(challenge)
@@ -57,7 +57,7 @@ def c6():
     assert(hamming_distance(h1, h2) == 37)
     keysize_max = 40
     keysize_try = 5
-    file = b64decode(''.join([line.rstrip('\n') for line in open('c6.txt')]))
+    file = b64decode(''.join([line.rstrip('\n') for line in open('data/c6.txt')]))
 
     #  Step 1: Simplified IC to guess key-length //That shit needs improvements all over the place
     keysize_prob = {}
@@ -98,7 +98,7 @@ def c6():
 
 
 def c7():
-    file = b64decode(''.join([line.rstrip('\n') for line in open('c7.txt')]))
+    file = b64decode(''.join([line.rstrip('\n') for line in open('data/c7.txt')]))
 
     key = b'YELLOW SUBMARINE'
     cipher = AES.new(key, AES.MODE_ECB)
@@ -108,7 +108,7 @@ def c7():
 
 def c8():
     weighted_file = {}
-    for line in open('c8.txt').readlines():
+    for line in open('data/c8.txt').readlines():
         line = line.strip()
         count = count_equal_blocks(b64decode(line), 16)
         if count:
