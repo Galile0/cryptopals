@@ -1,3 +1,5 @@
+from itertools import combinations
+
 char_distribution = {
                     'a': 0.0651738, 'b': 0.0124248, 'c': 0.0217339, 'd': 0.0349835,
                     'e': 0.1041442, 'f': 0.0197881, 'g': 0.0158610, 'h': 0.0492888,
@@ -89,3 +91,15 @@ def score_printable(data):
 
 def hamming_distance(x, y):
     return sum([bin(x[i] ^ y[i]).count('1') for i in range(len(x))])
+
+
+def count_equal_blocks(data, block_length):
+    """
+    Takes a bytelike Object, data, divides it into blocks of length block_length and counts the duplicates
+    :param data: bytelike Object
+    :param block_length: blocklength to divide data into
+    :return: count how many equal blocks are in (aabcd = 2,aabbcd=4)
+    """
+    blocks = [data[i*block_length : block_length*(i+1)] for i in range(len(data)//block_length)]
+    blocks_unique = set(blocks)
+    return len(blocks)-len(blocks_unique)

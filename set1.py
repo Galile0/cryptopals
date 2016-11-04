@@ -105,6 +105,17 @@ def c7():
     plaintext = cipher.decrypt(file)
     return plaintext
 
+
+def c8():
+    weighted_file = {}
+    for line in open('c8.txt').readlines():
+        line = line.strip()
+        count = count_equal_blocks(b64decode(line), 16)
+        if count:
+            weighted_file[count] = line
+    sorted_weighted_file = sorted(weighted_file.items(), key=lambda x: x[0])
+    return sorted_weighted_file
+
 if __name__ == "__main__":
     print("Challenge 1:", c1())
     print("Challenge 2:", c2())
@@ -113,3 +124,4 @@ if __name__ == "__main__":
     print("Challenge 5:", c5())
     print("Challenge 6:", c6())
     print("Challenge 7:", c7())
+    print("Challenge 8:", c8())
